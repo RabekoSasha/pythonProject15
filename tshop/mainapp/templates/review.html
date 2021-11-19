@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Отзывы
+{% endblock %}
+
+{% block content %}
+    <h1>Оставить отзыв</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}<br>
+        {{ form.message }}<br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+        <span>{{ error }}</span>
+    </form>
+
+    <h1>Отзывы о нас</h1>
+    {% if reviews %}
+        {% for el in reviews %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{ el.name }}</h3>
+                <p>{{ el.message }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p> Ваш отзыв будет первым</p>
+    {% endif %}
+{% endblock %}
